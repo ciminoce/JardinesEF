@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="JardinesDataSet" targetNamespace="http://tempuri.org/JardinesDataSet.xsd" xmlns:mstns="http://tempuri.org/JardinesDataSet.xsd" xmlns="http://tempuri.org/JardinesDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="JardinesDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="JardinesDataSet" msprop:Generator_UserDSName="JardinesDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PaisesDatatable" msprop:Generator_TableClassName="PaisesDatatableDataTable" msprop:Generator_TableVarName="tablePaisesDatatable" msprop:Generator_RowChangedName="PaisesDatatableRowChanged" msprop:Generator_TablePropName="PaisesDatatable" msprop:Generator_RowDeletingName="PaisesDatatableRowDeleting" msprop:Generator_RowChangingName="PaisesDatatableRowChanging" msprop:Generator_RowEvHandlerName="PaisesDatatableRowChangeEventHandler" msprop:Generator_RowDeletedName="PaisesDatatableRowDeleted" msprop:Generator_RowClassName="PaisesDatatableRow" msprop:Generator_UserTableName="PaisesDatatable" msprop:Generator_RowEvArgName="PaisesDatatableRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NombrePais" msprop:Generator_ColumnVarNameInTable="columnNombrePais" msprop:Generator_ColumnPropNameInRow="NombrePais" msprop:Generator_ColumnPropNameInTable="NombrePaisColumn" msprop:Generator_UserColumnName="NombrePais" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CategoriasDatatable" msprop:Generator_TableClassName="CategoriasDatatableDataTable" msprop:Generator_TableVarName="tableCategoriasDatatable" msprop:Generator_TablePropName="CategoriasDatatable" msprop:Generator_RowDeletingName="CategoriasDatatableRowDeleting" msprop:Generator_RowChangingName="CategoriasDatatableRowChanging" msprop:Generator_RowEvHandlerName="CategoriasDatatableRowChangeEventHandler" msprop:Generator_RowDeletedName="CategoriasDatatableRowDeleted" msprop:Generator_UserTableName="CategoriasDatatable" msprop:Generator_RowChangedName="CategoriasDatatableRowChanged" msprop:Generator_RowEvArgName="CategoriasDatatableRowChangeEvent" msprop:Generator_RowClassName="CategoriasDatatableRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NombreCategoria" msprop:Generator_ColumnVarNameInTable="columnNombreCategoria" msprop:Generator_ColumnPropNameInRow="NombreCategoria" msprop:Generator_ColumnPropNameInTable="NombreCategoriaColumn" msprop:Generator_UserColumnName="NombreCategoria" type="xs:string" minOccurs="0" />
+              <xs:element name="Descripcion" msprop:Generator_ColumnVarNameInTable="columnDescripcion" msprop:Generator_ColumnPropNameInRow="Descripcion" msprop:Generator_ColumnPropNameInTable="DescripcionColumn" msprop:Generator_UserColumnName="Descripcion" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
