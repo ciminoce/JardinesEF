@@ -42,7 +42,6 @@ namespace JardinesEF.Windows.Helpers
             combo.DisplayMember = "NombreCiudad";
             combo.ValueMember = "CiudadId";
             combo.SelectedIndex = 0;
-
         }
 
         public static void CargarDatosComboCategorias(ref ComboBox combo)

@@ -14,7 +14,6 @@ namespace JardinesEF.Servicios
 {
     public class OrdenesServicios:IOrdenesServicios
     {
-        //private readonly ViveroSqlDbContext _context; 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IOrdenesRepositorio _repositorio;
 
@@ -23,7 +22,6 @@ namespace JardinesEF.Servicios
 
         public OrdenesServicios(ViveroSqlDbContext context, IUnitOfWork unitOfWork, IOrdenesRepositorio repositorio, IProductosRepositorio repositorioProductos, IDetalleOrdenesRepositorio repositorioDetalles)
         {
-            //_context = context;
             _unitOfWork = unitOfWork;
             _repositorio = repositorio;
             _repositorioProductos = repositorioProductos;

@@ -44,7 +44,7 @@ namespace JardinesEF.Windows.Classes
             }
             else
             {
-                item.Cantidad++;
+                item.Cantidad+=detalleOrden.Cantidad;
             }
 
         }

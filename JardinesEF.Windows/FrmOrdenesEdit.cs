@@ -236,7 +236,7 @@ namespace JardinesEF.Windows
                 DetalleOrden detalleABorrar = (DetalleOrden) r.Tag;
 
                 Carrito.GetInstancia().QuitarDelCarrito(detalleABorrar);
-                _servicio.SetearReservarProducto(detalleOrden.ProductoId, -detalleOrden.Cantidad);
+                _servicio.SetearReservarProducto(detalleABorrar.ProductoId, -detalleABorrar.Cantidad);
 
                 HelperGrid.BorrarFila(PedidoDataGridView,r);
                 
