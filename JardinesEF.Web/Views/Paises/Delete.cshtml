@@ -1,0 +1,34 @@
+﻿@model JardinesEF.Web.Models.Pais.PaisListVm
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>Borrar País</h2>
+
+<h3>Está seguro de borrar el país seleccionado?</h3>
+<div>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombrePais)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombrePais)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-danger" /> |
+            @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-success" })
+        </div>
+    }
+</div>

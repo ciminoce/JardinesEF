@@ -91,7 +91,14 @@ namespace JardinesEF.Datos.Sql.Repositorios
 
         public bool EstaRelacionado(Pais pais)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _context.Ciudades.Any(c => c.PaisId == pais.PaisId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public int GetCantidad()
