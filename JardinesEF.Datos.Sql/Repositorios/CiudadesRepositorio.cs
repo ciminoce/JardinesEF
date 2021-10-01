@@ -55,8 +55,11 @@ namespace JardinesEF.Datos.Sql.Repositorios
         {
             try
             {
-                _context.Paises.Attach(ciudad.Pais);
+                if (ciudad.Pais!=null)
+                {
+                    _context.Paises.Attach(ciudad.Pais);
 
+                }
                 if (ciudad.CiudadId == 0)
                 {
                     //Cuando el id=0 entonces la entidad es nueva ==>alta
@@ -104,9 +107,17 @@ namespace JardinesEF.Datos.Sql.Repositorios
             }
         }
 
-        public bool EstaRelacionado(Ciudad TEntity)
+        public bool EstaRelacionado(Ciudad ciudad)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _context.Clientes.Any(c => c.CiudadId == ciudad.CiudadId) ||
+                       _context.Proveedores.Any(p => p.CiudadId == ciudad.CiudadId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
 
@@ -198,6 +209,20 @@ namespace JardinesEF.Datos.Sql.Repositorios
             try
             {
                 return _context.Ciudades.Count(predicate);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al intentar leer la tabla de Ciudades");
+            }
+        }
+
+        public List<Ciudad> GetLista()
+        {
+            try
+            {
+                return _context.Ciudades.Include(c=>c.Pais).OrderBy(c=>c.Pais.NombrePais)
+                    .ThenBy(c=>c.NombreCiudad)
+                    .ToList();
             }
             catch (Exception e)
             {

@@ -143,11 +143,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Classes\Mapeador.cs" />
+    <Compile Include="Controllers\CiudadesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaisesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Ciudad\CiudadEditVm.cs" />
+    <Compile Include="Models\Ciudad\CiudadListVm.cs" />
     <Compile Include="Models\Pais\PaisEditVm.cs" />
     <Compile Include="Models\Pais\PaisListVm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -192,6 +196,10 @@
     <Content Include="Views\Paises\Create.cshtml" />
     <Content Include="Views\Paises\Edit.cshtml" />
     <Content Include="Views\Paises\Delete.cshtml" />
+    <Content Include="Views\Ciudades\Index.cshtml" />
+    <Content Include="Views\Ciudades\Create.cshtml" />
+    <Content Include="Views\Ciudades\Edit.cshtml" />
+    <Content Include="Views\Ciudades\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

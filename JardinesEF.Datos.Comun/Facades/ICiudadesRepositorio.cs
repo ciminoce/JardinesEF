@@ -11,5 +11,6 @@ namespace JardinesEF.Datos.Comun.Facades
     {
         List<Ciudad> Find(Func<Ciudad, bool> predicate, int? registros, int? pagina);
         int GetCantidad(Func<Ciudad, bool> predicate);
+        List<Ciudad> GetLista();
     }
 }

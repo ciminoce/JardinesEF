@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using JardinesEf.Entidades.Entidades;
 using JardinesEF.Servicios.Facades;
+using JardinesEF.Web.Classes;
 using JardinesEF.Web.Models.Pais;
 using Microsoft.Ajax.Utilities;
 
@@ -14,39 +15,25 @@ namespace JardinesEF.Web.Controllers
     public class PaisesController : Controller
     {
         private readonly IPaisesServicios _servicio;
+        private readonly ICiudadesServicios _servicioCiudades;
 
-        public PaisesController(IPaisesServicios servicio)
+        public PaisesController(IPaisesServicios servicio, ICiudadesServicios servicioCiudades)
         {
             _servicio = servicio;
+            _servicioCiudades = servicioCiudades;
         }
         // GET: Paises
         public ActionResult Index()
         {
             var listaPaises = _servicio.GetLista();
-            var listaPaisVm = ConstruirListaVm(listaPaises);
+            var listaPaisVm =Mapeador.ConstruirListaVm(listaPaises);
+            foreach (var paisVm in listaPaisVm)
+            {
+                paisVm.CantidadCiudades = _servicioCiudades.GetCantidad(c => c.PaisId == paisVm.PaisId);
+            }
             return View(listaPaisVm);
         }
 
-        private List<PaisListVm> ConstruirListaVm(List<Pais> listaPaises)
-        {
-            var lista = new List<PaisListVm>();
-            foreach (var pais in listaPaises)
-            {
-                var paisVm = ConstruirPaisVm(pais);
-                lista.Add(paisVm);
-            }
-
-            return lista;
-        }
-
-        private PaisListVm ConstruirPaisVm(Pais pais)
-        {
-            return new PaisListVm()
-            {
-                PaisId = pais.PaisId,
-                NombrePais = pais.NombrePais
-            };
-        }
 
         [HttpGet]
         public ActionResult Create()
@@ -63,7 +50,7 @@ namespace JardinesEF.Web.Controllers
                 return View(paisVm);
             }
 
-            var pais = ConstruirPais(paisVm);
+            var pais =Mapeador.ConstruirPais(paisVm);
 
             try
             {
@@ -82,14 +69,6 @@ namespace JardinesEF.Web.Controllers
             }
         }
 
-        private Pais ConstruirPais(PaisEditVm paisVm)
-        {
-            return new Pais()
-            {
-                PaisId = paisVm.PaisId,
-                NombrePais = paisVm.NombrePais
-            };
-        }
 
         [HttpGet]
         public ActionResult Edit(int? id)
@@ -106,7 +85,7 @@ namespace JardinesEF.Web.Controllers
                 return new HttpNotFoundResult("Código de País inexistente!!!");
             }
 
-            var paisVm = ConstruirPaisEditVm(pais);
+            var paisVm =Mapeador.ConstruirPaisEditVm(pais);
             return View(paisVm);
         }
 
@@ -119,7 +98,7 @@ namespace JardinesEF.Web.Controllers
                 return View(paisVm);
             }
 
-            var pais = ConstruirPais(paisVm);
+            var pais =Mapeador.ConstruirPais(paisVm);
             try
             {
                 if (_servicio.Existe(pais))
@@ -132,17 +111,9 @@ namespace JardinesEF.Web.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(paisVm);
             }
-        }
-        private PaisEditVm ConstruirPaisEditVm(Pais pais)
-        {
-            return new PaisEditVm()
-            {
-                PaisId = pais.PaisId,
-                NombrePais = pais.NombrePais
-            };
         }
 
         [HttpGet]
@@ -159,7 +130,7 @@ namespace JardinesEF.Web.Controllers
                 return new HttpNotFoundResult("Código de País inexistente!!!");
             }
 
-            var paisVm = ConstruirPaisVm(pais);
+            var paisVm =Mapeador.ConstruirPaisVm(pais);
             return View(paisVm);
         }
 
@@ -170,7 +141,7 @@ namespace JardinesEF.Web.Controllers
             var pais = _servicio.GetEntityPorId(id);
             if (_servicio.EstaRelacionado(pais))
             {
-                var paisVm = ConstruirPaisVm(pais);
+                var paisVm =Mapeador.ConstruirPaisVm(pais);
                 ModelState.AddModelError(string.Empty, "País relacionado... baja denegada");
                 return View(paisVm);
             }
@@ -182,7 +153,7 @@ namespace JardinesEF.Web.Controllers
             }
             catch (Exception e)
             {
-                var paisVm = ConstruirPaisVm(pais);
+                var paisVm =Mapeador.ConstruirPaisVm(pais);
                 ModelState.AddModelError(string.Empty, "País relacionado... baja denegada");
                 return View(paisVm);
             }

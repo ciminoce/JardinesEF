@@ -19,5 +19,6 @@ namespace JardinesEF.Servicios.Facades
         //List<IGrouping<int, Planta>> GetGrupo();
         void Borrar(int id);
         int GetCantidad(Func<Ciudad, bool> predicate);
+        List<Ciudad> GetLista();
     }
 }

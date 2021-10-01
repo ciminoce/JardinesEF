@@ -14,20 +14,28 @@
         <th>
             @Html.DisplayNameFor(model => model.NombrePais)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CantidadCiudades)
+        </th>
+
         <th>Acciones</th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NombrePais)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.PaisId },new{@class="btn btn-warning"}) |
-            @Html.ActionLink("Detalles", "Details", new { /* id=item.PrimaryKey */ },new {@class= "btn btn-info" }) |
-            @Html.ActionLink("Borrar", "Delete", new { id = item.PaisId },new{@class="btn btn-danger"})
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NombrePais)
+    </td>
+    <td style="text-align: right">
+        @Html.DisplayFor(modelItem => item.CantidadCiudades)
+    </td>
+
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.PaisId }, new { @class = "btn btn-warning" }) |
+        @Html.ActionLink("Detalles", "Details", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-info" }) |
+        @Html.ActionLink("Borrar", "Delete", new { id = item.PaisId }, new { @class = "btn btn-danger" })
+    </td>
+</tr>
 }
 
 </table>

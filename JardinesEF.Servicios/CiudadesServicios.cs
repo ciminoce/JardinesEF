@@ -71,11 +71,11 @@ namespace JardinesEF.Servicios
             }
         }
 
-        public void Guardar(Ciudad pais)
+        public void Guardar(Ciudad ciudad)
         {
             try
             {
-                _repositorio.Guardar(pais);
+                _repositorio.Guardar(ciudad);
                 _unitOfWork.Save();
             }
             catch (Exception e)
@@ -84,11 +84,11 @@ namespace JardinesEF.Servicios
             }
         }
 
-        public bool Existe(Ciudad pais)
+        public bool Existe(Ciudad ciudad)
         {
             try
             {
-                return _repositorio.Existe(pais);
+                return _repositorio.Existe(ciudad);
             }
             catch (Exception e)
             {
@@ -96,9 +96,16 @@ namespace JardinesEF.Servicios
             }
         }
 
-        public bool EstaRelacionado(Ciudad pais)
+        public bool EstaRelacionado(Ciudad ciudad)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repositorio.EstaRelacionado(ciudad);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public int GetCantidad()
@@ -151,5 +158,16 @@ namespace JardinesEF.Servicios
             }
         }
 
+        public List<Ciudad> GetLista()
+        {
+            try
+            {
+                return _repositorio.GetLista();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
