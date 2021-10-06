@@ -91,5 +91,14 @@ namespace JardinesEF.Web.Classes
                 PaisId = ciudad.PaisId
             };
         }
+
+        public static PaisDetailsVm ConstruirPaisDetailsVm(Pais pais)
+        {
+            return new PaisDetailsVm()
+            {
+                PaisId = pais.PaisId,
+                NombrePais = pais.NombrePais
+            };
+        }
     }
 }

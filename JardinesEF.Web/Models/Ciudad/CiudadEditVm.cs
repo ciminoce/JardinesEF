@@ -19,7 +19,7 @@ namespace JardinesEF.Web.Models.Ciudad
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Range(1,int.MaxValue,ErrorMessage = "Debe seleccionar un país")]
         public int PaisId { get; set; }
-
+        
         public PaisListVm Pais { get; set; }
         public List<PaisListVm> Paises { get; set; }
 

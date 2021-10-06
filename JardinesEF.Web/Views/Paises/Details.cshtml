@@ -1,0 +1,62 @@
+﻿@model JardinesEF.Web.Models.Pais.PaisDetailsVm
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+<h3 class="well">País</h3>
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model=>model.NombrePais)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model=>model.NombrePais)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model=>model.CantidadCiudades)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model=>model.CantidadCiudades)
+    </dd>
+</dl>
+<p>
+    <a href="@Url.Action("AddCity","Paises",new{id=Model.PaisId})" class="btn btn-primary">Agregar Ciudad</a>
+    <a href="@Url.Action("Edit","Paises")" class="btn btn-warning">Editar</a>
+    <a href="@Url.Action("Index","Paises")" class="btn btn-success">Volver</a>
+</p>
+<h3 class="well">Ciudades</h3>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model=>model.Ciudades[0].NombreCiudad)
+        </th>
+        <th>
+            Acciones
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        @if (Model.Ciudades.Any())
+        {
+            foreach (var item in Model.Ciudades)
+            {
+                <tr>
+                    <td>@item.NombreCiudad</td>
+                    <td>
+                        <a href="##" class="btn btn-warning">Editar</a>
+                        <a href="@Url.Action("DeleteCity","Paises",new{id=item.CiudadId})" class="btn btn-danger">Borrar</a>
+                    </td>
+                </tr>
+            }
+
+        }
+        else
+        {
+            <tr>
+                <td colspan="2" style="text-align: center">No se han agregado ciudades todavía</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,44 @@
+﻿@model JardinesEF.Web.Models.Ciudad.CiudadEditVm
+@{
+    ViewBag.Title = "DeleteCity";
+}
+
+<h2>Borrar Ciudad</h2>
+<h3>Está seguro de querer borrar el registro seleccionado?</h3>
+<div>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model=>model.CiudadId)
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreCiudad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreCiudad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pais.NombrePais)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pais.NombrePais)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-danger" /> |
+            @Html.ActionLink("Volver", $"Details/{Model.PaisId}", null, new { @class = "btn btn-success" })
+        </div>
+    }
+</div>
+
+

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using JardinesEf.Entidades.Entidades;
 using JardinesEF.Servicios.Facades;
 using JardinesEF.Web.Classes;
+using JardinesEF.Web.Models.Ciudad;
 using JardinesEF.Web.Models.Pais;
 using Microsoft.Ajax.Utilities;
 
@@ -159,5 +160,129 @@ namespace JardinesEF.Web.Controllers
             }
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var pais = _servicio.GetEntityPorId(id.Value);
+            if (pais==null)
+            {
+                return HttpNotFound("Código de país inexistente!!!");
+            }
+
+            var paisVm = Mapeador.ConstruirPaisDetailsVm(pais);
+            paisVm.CantidadCiudades = _servicioCiudades.GetCantidad(c => c.PaisId == pais.PaisId);
+            paisVm.Ciudades =
+                Mapeador.ConstruirListaCiudadListVm(_servicioCiudades.Find(c => c.PaisId == pais.PaisId, null, null));
+            return View(paisVm);
+        }
+
+        public ActionResult AddCity(int? id)
+        {
+            if (id==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var pais = _servicio.GetEntityPorId(id.Value);
+            if (pais==null)
+            {
+                return HttpNotFound("Código de país inexistente!!!");
+            }
+
+            var ciudadVm = new CiudadEditVm()
+            {
+                PaisId = pais.PaisId,
+                Pais = Mapeador.ConstruirPaisVm(pais)
+            };
+            return View(ciudadVm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddCity(CiudadEditVm ciudadVm)
+        {
+            if (!ModelState.IsValid)
+            {
+                var pais =Mapeador.ConstruirPaisVm(_servicio.GetEntityPorId(ciudadVm.PaisId));
+                ciudadVm.Pais = pais;
+                return View(ciudadVm);
+            }
+
+            var ciudad = Mapeador.ConstruirCiudad(ciudadVm);
+            try
+            {
+                if (_servicioCiudades.Existe(ciudad))
+                {
+                    var pais = Mapeador.ConstruirPaisVm(_servicio.GetEntityPorId(ciudadVm.PaisId));
+                    ciudadVm.Pais = pais;
+
+                    ModelState.AddModelError(string.Empty,"Ciudad existente!!!");
+                    return View(ciudadVm);
+                }
+                _servicioCiudades.Guardar(ciudad);
+                return RedirectToAction($"Details/{ciudad.PaisId}");
+            }
+            catch (Exception e)
+            {
+                var pais = Mapeador.ConstruirPaisVm(_servicio.GetEntityPorId(ciudadVm.PaisId));
+                ciudadVm.Pais = pais;
+
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(ciudadVm);
+            }
+        }
+
+        public ActionResult DeleteCity(int? id)
+        {
+            if (id==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var ciudad = _servicioCiudades.GetEntityPorId(id.Value);
+            if (ciudad==null)
+            {
+                return HttpNotFound("Código de ciudad inexistente!!!");
+            }
+
+            var ciudadVm = Mapeador.ConstruirCiudadEditVm(ciudad);
+            var paisVm = Mapeador.ConstruirPaisVm(_servicio.GetEntityPorId(ciudadVm.PaisId));
+            ciudadVm.Pais = paisVm;
+            return View(ciudadVm);
+        }
+
+        [HttpPost, ActionName("DeleteCity")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteCity(int id)
+        {
+            var ciudad = _servicioCiudades.GetEntityPorId(id);
+
+            try
+            {
+                if (_servicioCiudades.EstaRelacionado(ciudad))
+                {
+                    var ciudadVm = Mapeador.ConstruirCiudadEditVm(ciudad);
+                    var paisVm = Mapeador.ConstruirPaisVm(_servicio.GetEntityPorId(ciudad.PaisId));
+                    ciudadVm.Pais = paisVm;
+                    ModelState.AddModelError(string.Empty,"Ciudad con registros relacionados... Baja denegada!!!");
+                    return View(ciudadVm);
+
+                }
+                _servicioCiudades.Borrar(ciudad.CiudadId);
+                return RedirectToAction($"Details/{ciudad.PaisId}");
+            }
+            catch (Exception e)
+            {
+                var ciudadVm = Mapeador.ConstruirCiudadEditVm(ciudad);
+
+                var paisVm = Mapeador.ConstruirPaisVm(_servicio.GetEntityPorId(ciudadVm.PaisId));
+                ciudadVm.Pais = paisVm;
+                ModelState.AddModelError(string.Empty, e.Message);
+                return View(ciudadVm);
+            }
+        }
     }
 }
