@@ -1,0 +1,56 @@
+﻿@model IEnumerable<JardinesEF.Web.Models.Producto.ProductoListVm>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div>
+    <a href="@Url.Action("Create","Productos")" class="btn btn-primary" style="float: right">Nuevo</a>
+    <h2>Listado de Productos</h2>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreProducto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrecioUnitario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnidadesEnStock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Suspendido)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreProducto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categoria)
+        </td>
+        <td style="text-align: right">
+            @Html.DisplayFor(modelItem => item.PrecioUnitario)
+        </td>
+        <td style="text-align: right">
+            @Html.DisplayFor(modelItem => item.UnidadesEnStock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Suspendido)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { /* id=item.PrimaryKey */ },new{@class="btn btn-warning"})
+            @Html.ActionLink("Detalles", "Details", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-info" }) 
+            @Html.ActionLink("Borrar", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

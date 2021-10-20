@@ -1,0 +1,32 @@
+﻿@model IEnumerable<JardinesEF.Web.Models.Categoria.CategoriaListVm>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div>
+    <a href="@Url.Action("Create","Categorias")" class="btn btn-primary" style="float: right">Nuevo</a>
+    <h2>Listado de Categorías</h2>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreCategoria)
+        </th>
+        <th>Acciones</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreCategoria)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.CategoriaId },new {@class="btn btn-warning"}) 
+            @Html.ActionLink("Detalles", "Details", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-info" }) 
+            @Html.ActionLink("Borrar", "Delete", new { id=item.CategoriaId }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

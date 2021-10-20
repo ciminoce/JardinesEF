@@ -98,9 +98,16 @@ namespace JardinesEF.Datos.Sql.Repositorios
             }
         }
 
-        public bool EstaRelacionado(Categoria TEntity)
+        public bool EstaRelacionado(Categoria categoria)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _context.Productos.Any(p => p.CategoriaId == categoria.CategoriaId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
 

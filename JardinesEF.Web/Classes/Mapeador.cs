@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Web;
 using System.Web.ModelBinding;
 using JardinesEf.Entidades.Entidades;
+using JardinesEF.Web.Models.Categoria;
 using JardinesEF.Web.Models.Ciudad;
 using JardinesEF.Web.Models.Pais;
+using JardinesEF.Web.Models.Producto;
+using JardinesEF.Web.Models.Proveedor;
 
 namespace JardinesEF.Web.Classes
 {
@@ -98,6 +102,109 @@ namespace JardinesEF.Web.Classes
             {
                 PaisId = pais.PaisId,
                 NombrePais = pais.NombrePais
+            };
+        }
+
+        public static List<CategoriaListVm> ConstruirListaCategoriasListVm(List<Categoria> lista)
+        {
+            var listaVm = new List<CategoriaListVm>();
+            foreach (var categoria in lista)
+            {
+                var categoriaVm = ConstruirCategoriaListVm(categoria);
+                listaVm.Add(categoriaVm);
+            }
+
+            return listaVm;
+        }
+
+        public static CategoriaListVm ConstruirCategoriaListVm(Categoria categoria)
+        {
+            return new CategoriaListVm()
+            {
+                CategoriaId = categoria.CategoriaId,
+                NombreCategoria = categoria.NombreCategoria
+            };
+        }
+
+        public static Categoria ConstruirCategoria(CategoriaEditVm categoriaVm)
+        {
+            return new Categoria()
+            {
+                CategoriaId = categoriaVm.CategoriaId,
+                NombreCategoria = categoriaVm.NombreCategoria,
+                Descripcion = categoriaVm.Descripcion
+            };
+        }
+
+        public static CategoriaEditVm ConstruirCategoriaEditVm(Categoria categoria)
+        {
+            return new CategoriaEditVm()
+            {
+                CategoriaId = categoria.CategoriaId,
+                NombreCategoria = categoria.NombreCategoria,
+                Descripcion = categoria.Descripcion
+            };
+        }
+
+        public static List<ProductoListVm> ConstruirListaProductoListVm(List<Producto> lista)
+        {
+            var listaVm = new List<ProductoListVm>();
+            foreach (var producto in lista)
+            {
+                var productoVm =Mapeador.ConstruirProductoListVm(producto);
+                listaVm.Add(productoVm);
+            }
+
+            return listaVm;
+        }
+
+        private static ProductoListVm ConstruirProductoListVm(Producto producto)
+        {
+            return new ProductoListVm()
+            {
+                ProductoId = producto.ProductoId,
+                NombreProducto = producto.NombreProducto,
+                Categoria = producto.Categoria.NombreCategoria,
+                UnidadesEnStock = producto.UnidadesEnStock,
+                PrecioUnitario = producto.PrecioUnitario,
+                Suspendido = producto.Suspendido,
+            };
+        }
+
+        public static List<ProveedorComboVm> ConstruirListaComboProveedores(List<Proveedor> lista)
+        {
+            var listaVm = new List<ProveedorComboVm>();
+            foreach (var proveedor in lista)
+            {
+                var proveedorVm = Mapeador.ConstruirProveedorCombo(proveedor);
+                listaVm.Add(proveedorVm);
+            }
+
+            return listaVm;
+        }
+
+        private static ProveedorComboVm ConstruirProveedorCombo(Proveedor proveedor)
+        {
+            return new ProveedorComboVm()
+            {
+                ProveedorId = proveedor.ProveedorId,
+                NombreProveedor = proveedor.NombreProveedor
+            };
+        }
+
+        public static Producto ConstruirProducto(ProductoEditVm productoVm)
+        {
+            return new Producto()
+            {
+                ProductoId = productoVm.ProductoId,
+                NombreProducto = productoVm.NombreProducto,
+                NombreLatin = productoVm.NombreLatin,
+                CategoriaId = productoVm.CategoriaId,
+                ProveedorId = productoVm.ProveedorId,
+                NivelDeReposicion = productoVm.NivelDeReposicion,
+                UnidadesEnStock = productoVm.UnidadesEnStock,
+                Suspendido = productoVm.Suspendido,
+                PrecioUnitario = productoVm.PrecioUnitario
             };
         }
     }

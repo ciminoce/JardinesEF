@@ -74,7 +74,14 @@ namespace JardinesEF.Servicios
 
         public bool EstaRelacionado(Categoria categoria)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repositorio.EstaRelacionado(categoria);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public int GetCantidad()

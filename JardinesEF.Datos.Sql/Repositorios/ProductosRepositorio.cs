@@ -53,8 +53,17 @@ namespace JardinesEF.Datos.Sql.Repositorios
         {
             try
             {
-                _context.Categorias.Attach(producto.Categoria);
-                _context.Proveedores.Attach(producto.Proveedor);
+                if (producto.Categoria!=null)
+                {
+                    _context.Categorias.Attach(producto.Categoria);
+                    
+                }
+
+                if (producto.Proveedor!=null)
+                {
+                    _context.Proveedores.Attach(producto.Proveedor);
+                    
+                }
                 if (producto.ProductoId == 0)
                 {
                     //Cuando el id=0 entonces la entidad es nueva ==>alta
