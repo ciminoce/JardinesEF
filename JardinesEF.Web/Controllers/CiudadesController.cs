@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using JardinesEF.Servicios.Facades;
 using JardinesEF.Web.Classes;
+using JardinesEF.Web.Models.Categoria;
 using JardinesEF.Web.Models.Ciudad;
 
 namespace JardinesEF.Web.Controllers
@@ -19,6 +20,27 @@ namespace JardinesEF.Web.Controllers
         {
             _servicio = servicio;
             _servicioPais = servicioPais;
+        }
+
+        public ActionResult Index2(int pagina = 1)
+        {
+            var cantidadDeRegistrosPorPagina = 10;
+            var cantidadDeRegistros = _servicio.GetCantidad();
+            var totalPaginas = (int)Math.Ceiling((double)cantidadDeRegistros / cantidadDeRegistrosPorPagina);
+            var ciudades = _servicio.GetLista(cantidadDeRegistrosPorPagina, pagina);
+            var ciudadesVm = Mapeador.ConstruirListaCiudadListVm(ciudades);
+
+            var paginador = new Listador<CiudadListVm>()
+            {
+                RegistrosPorPagina = cantidadDeRegistrosPorPagina,
+                TotalPaginas = totalPaginas,
+                PaginaActual = pagina,
+                TotalRegistros = cantidadDeRegistros,
+                Registros = ciudadesVm
+
+            };
+
+            return View("Index3",paginador);
         }
 
         // GET: Ciudades

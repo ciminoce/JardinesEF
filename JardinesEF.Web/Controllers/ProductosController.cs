@@ -7,6 +7,7 @@ using JardinesEf.Entidades.Entidades;
 using JardinesEF.Servicios.Facades;
 using JardinesEF.Web.Classes;
 using JardinesEF.Web.Models.Producto;
+using PagedList;
 
 namespace JardinesEF.Web.Controllers
 {
@@ -24,12 +25,49 @@ namespace JardinesEF.Web.Controllers
             _servicioCategorias = servicioCategorias;
         }
 
+        private readonly int cantidadPorPagina = 12;
 
-        public ActionResult Index()
+        public ActionResult Index(int? categoriaSeleccionadaId=null,int? page=null)
         {
-            var lista = _servicio.GetLista();
+            page = (page ?? 1);
+            if (categoriaSeleccionadaId != null)
+            {
+                Session["categoriaSeleccionadaId"] = categoriaSeleccionadaId;
+            }
+            else
+            {
+                if (Session["categoriaSeleccionadaId"] != null)
+                {
+                    categoriaSeleccionadaId = (int)Session["categoriaSeleccionadaId"];
+                }
+            }
+
+
+            List<Producto> lista;
+            if (categoriaSeleccionadaId!=null)
+            {
+                if (categoriaSeleccionadaId.Value>0)
+                {
+                    lista = _servicio.GetLista(categoriaSeleccionadaId.Value);
+                }
+                else
+                {
+                    lista = _servicio.GetLista();
+                }
+            }
+            else
+            {
+                lista = _servicio.GetLista();
+                
+            }
             var listaVm = Mapeador.ConstruirListaProductoListVm(lista);
-            return View(listaVm);
+            var listaCategorias = _servicioCategorias.GetLista();
+            listaCategorias.Insert(0, new Categoria() { CategoriaId = 0, NombreCategoria = "[Seleccione una Categoría]" });
+            listaCategorias.Insert(1, new Categoria() { CategoriaId = -1, NombreCategoria = "[Ver Todos]" });
+
+            ViewBag.Categorias = new SelectList(listaCategorias, "CategoriaId", "NombreCategoria", categoriaSeleccionadaId);
+
+            return View(listaVm.ToPagedList((int)page,cantidadPorPagina));
         }
 
         public ActionResult Create()

@@ -1,0 +1,40 @@
+﻿@model JardinesEF.Web.Classes.PaginadorGenerico
+@*Funcionalidad con nros de página*@
+@{
+    var Inicial = 1;
+    var radio = 2;
+    var cantidadMaximaDePaginas = radio * 2 + 1;
+    var final = (Model.TotalPaginas > cantidadMaximaDePaginas) ? cantidadMaximaDePaginas : Model.TotalPaginas;
+    if (Model.PaginaActual > radio + 1)
+    {
+        Inicial = Model.PaginaActual - radio;
+        if (Model.TotalPaginas > Model.PaginaActual + radio)
+        {
+            final = Model.PaginaActual + radio;
+        }
+        else
+        {
+            final = Model.TotalPaginas;
+        }
+    }
+    <ul class="pagination">
+
+        <li>@Html.ActionLink("Primera", null, new { pagina = 1 })</li>
+        @for (int i = Inicial; i <= final; i++)
+        {
+
+            if (i == Model.PaginaActual)
+            {
+                <li class="active">@Html.ActionLink(i.ToString(), null, new { pagina = i })</li>
+            }
+            else
+            {
+                <li>@Html.ActionLink(i.ToString(), null, new { pagina = i })</li>
+            }
+        }
+
+        <li>@Html.ActionLink("Última", null, new { pagina = Model.TotalPaginas })</li>
+    </ul>
+
+}
+

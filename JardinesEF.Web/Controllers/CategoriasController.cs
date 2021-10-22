@@ -8,24 +8,26 @@ using JardinesEF.Servicios.Facades;
 using JardinesEF.Web.Classes;
 using JardinesEF.Web.Models.Categoria;
 using JardinesEF.Web.Models.Pais;
+using PagedList;
 
 namespace JardinesEF.Web.Controllers
 {
     public class CategoriasController : Controller
     {
         private readonly ICategoriasServicios _servicio;
-
+        private readonly int cantidadPorPagina = 12;
         public CategoriasController(ICategoriasServicios servicio)
         {
             _servicio = servicio;
         }
         // GET: Categorias
-        public ActionResult Index()
+        public ActionResult Index(int? page=null)
         {
+            page = (page ?? 1);
             var lista = _servicio.GetLista();
             var listaVm = Mapeador.ConstruirListaCategoriasListVm(lista);
 
-            return View(listaVm);
+            return View(listaVm.ToPagedList((int)page,cantidadPorPagina));
         }
 
         public ActionResult Create()

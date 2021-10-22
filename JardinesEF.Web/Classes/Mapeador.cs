@@ -7,6 +7,7 @@ using System.Web.ModelBinding;
 using JardinesEf.Entidades.Entidades;
 using JardinesEF.Web.Models.Categoria;
 using JardinesEF.Web.Models.Ciudad;
+using JardinesEF.Web.Models.Cliente;
 using JardinesEF.Web.Models.Pais;
 using JardinesEF.Web.Models.Producto;
 using JardinesEF.Web.Models.Proveedor;
@@ -205,6 +206,31 @@ namespace JardinesEF.Web.Classes
                 UnidadesEnStock = productoVm.UnidadesEnStock,
                 Suspendido = productoVm.Suspendido,
                 PrecioUnitario = productoVm.PrecioUnitario
+            };
+        }
+
+        public static List<ClienteListVm> ConstruirListaClientesListVm(List<Cliente> lista)
+        {
+            var listaVm = new List<ClienteListVm>();
+            foreach (var cliente in lista)
+            {
+                var clienteVm = ConstruirClientesListVm(cliente);
+                listaVm.Add(clienteVm);
+            }
+
+            return listaVm;
+
+        }
+
+        private static ClienteListVm ConstruirClientesListVm(Cliente cliente)
+        {
+            return new ClienteListVm()
+            {
+                ClienteId = cliente.ClienteId,
+                Nombres = cliente.Nombres,
+                Apellido = cliente.Apellido,
+                Pais = cliente.Pais.NombrePais,
+                Ciudad = cliente.Ciudad.NombreCiudad
             };
         }
     }

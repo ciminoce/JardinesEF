@@ -1,0 +1,91 @@
+﻿@model JardinesEF.Web.Classes.Listador<JardinesEF.Web.Models.Ciudad.CiudadListVm>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div>
+    <a href="@Url.Action("Create","Ciudades")" style="float: right" class="btn btn-primary">Nuevo</a>
+    <h2>Listado de Ciudades</h2>
+
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Registros.FirstOrDefault().NombreCiudad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registros.FirstOrDefault().NombrePais)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Registros)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreCiudad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombrePais)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.CiudadId }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Detalles", "Details", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Borrar", "Delete", new { id = item.CiudadId }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+@if (Model.TotalRegistros > 0)
+{
+    <span>
+        <strong>@Model.TotalRegistros</strong> registros encontrados
+    </span>
+    <span>&nbsp;|&nbsp;</span>
+    <span>
+        Página <strong>@(Model.PaginaActual)</strong> de
+        <strong>@Model.TotalPaginas</strong>
+    </span>
+    <span>&nbsp;|&nbsp;</span>
+}
+else
+{
+    <span>No hay resultados para esta búsqueda</span>
+    <span>&nbsp;|&nbsp;</span>
+}
+
+@if (Model.PaginaActual > 1)
+{
+    @Html.ActionLink("<<", "Index2", new { pagina = 1 },
+        new { @class = "btn btn-sm btn-default" })
+    <span></span>
+    @Html.ActionLink("Anterior", "Index2", new { pagina = Model.PaginaActual - 1 },
+        new { @class = "btn btn-sm btn-default" })
+}
+else
+{
+    @Html.ActionLink("<<", "Index2", new { pagina = 1 },
+        new { @class = "btn btn-sm btn-default disabled" })
+    <span></span>
+    @Html.ActionLink("Anterior", "Index2", new { pagina = 1 },
+        new { @class = "btn btn-sm btn-default disabled" })
+}
+<span></span>
+@if (Model.PaginaActual < Model.TotalPaginas)
+{
+    @Html.ActionLink("Siguiente", "Index2", new { pagina = Model.PaginaActual + 1 },
+        new { @class = "btn btn-sm btn-default" })
+    <span></span>
+    @Html.ActionLink(">>", "Index2", new { pagina = Model.TotalPaginas },
+        new { @class = "btn btn-sm btn-default" })
+}
+else
+{
+    @Html.ActionLink("Siguiente", "Index2", new { pagina = Model.TotalPaginas - 1 },
+        new { @class = "btn btn-sm btn-default disabled" })
+    <span></span>
+    @Html.ActionLink(">>", "Index2", new { pagina = Model.TotalPaginas },
+        new { @class = "btn btn-sm btn-default disabled" })
+}
