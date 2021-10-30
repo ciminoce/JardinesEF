@@ -1,4 +1,5 @@
 ﻿@model PagedList.IPagedList<JardinesEF.Web.Models.Cliente.ClienteListVm>
+@using JardinesEF.Web.Classes
 @using PagedList.Mvc
 
 <div>
@@ -6,7 +7,35 @@
     <h2>Listado de Clientes</h2>
 
 </div>
+@if (TempData["operacion"] != null)
+{
+    var operacion = (Operacion)TempData["operacion"];
+    var msg = TempData["Msg"].ToString();
+    switch (operacion)
+    {
+        case Operacion.Agregar:
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Éxito!</strong> @msg
+            </div>
 
+            break;
+        case Operacion.Borrar:
+            <div class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Éxito!</strong> @msg
+            </div>
+
+            break;
+        case Operacion.Editar:
+            <div class="alert alert-warning alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Éxito!</strong> @msg
+            </div>
+
+            break;
+    }
+}
 <table class="table">
     <tr>
         <th>
@@ -40,9 +69,9 @@
                 @Html.DisplayFor(modelItem => item.Ciudad)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { id=item.ClienteId},new{@class="btn btn-warning"}) 
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.ClienteId }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }

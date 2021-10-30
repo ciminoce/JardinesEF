@@ -84,9 +84,16 @@ namespace JardinesEF.Servicios
             }
         }
 
-        public bool EstaRelacionado(Cliente pais)
+        public bool EstaRelacionado(Cliente cliente)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _repositorio.EstaRelacionado(cliente);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public int GetCantidad()

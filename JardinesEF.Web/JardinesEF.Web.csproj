@@ -152,6 +152,7 @@
     <Compile Include="Classes\ListadorGenerico.cs" />
     <Compile Include="Classes\Mapeador.cs" />
     <Compile Include="Classes\Listador.cs" />
+    <Compile Include="Classes\Operacion.cs" />
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\CiudadesController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
@@ -234,6 +235,9 @@
     <Content Include="Views\Ciudades\Index3.cshtml" />
     <Content Include="Views\Clientes\Index.cshtml" />
     <Content Include="Views\Clientes\Create.cshtml" />
+    <Content Include="Views\Clientes\Edit.cshtml" />
+    <Content Include="Views\Shared\_mostraCliente.cshtml" />
+    <Content Include="Views\Clientes\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

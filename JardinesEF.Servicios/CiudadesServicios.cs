@@ -169,5 +169,17 @@ namespace JardinesEF.Servicios
                 throw new Exception(e.Message);
             }
         }
+
+        public List<Ciudad> GetLista(int paisId)
+        {
+            try
+            {
+                return _repositorio.GetLista(paisId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

@@ -20,5 +20,6 @@ namespace JardinesEF.Servicios.Facades
         void Borrar(int id);
         int GetCantidad(Func<Ciudad, bool> predicate);
         List<Ciudad> GetLista();
+        List<Ciudad> GetLista(int paisId);
     }
 }

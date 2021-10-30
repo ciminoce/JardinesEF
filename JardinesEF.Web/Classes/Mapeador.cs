@@ -214,7 +214,7 @@ namespace JardinesEF.Web.Classes
             var listaVm = new List<ClienteListVm>();
             foreach (var cliente in lista)
             {
-                var clienteVm = ConstruirClientesListVm(cliente);
+                var clienteVm = ConstruirClienteListVm(cliente);
                 listaVm.Add(clienteVm);
             }
 
@@ -222,7 +222,7 @@ namespace JardinesEF.Web.Classes
 
         }
 
-        private static ClienteListVm ConstruirClientesListVm(Cliente cliente)
+        public static ClienteListVm ConstruirClienteListVm(Cliente cliente)
         {
             return new ClienteListVm()
             {
@@ -231,6 +231,35 @@ namespace JardinesEF.Web.Classes
                 Apellido = cliente.Apellido,
                 Pais = cliente.Pais.NombrePais,
                 Ciudad = cliente.Ciudad.NombreCiudad
+            };
+        }
+
+        public static Cliente ConstruirCliente(ClienteEditVm clienteVm)
+        {
+            return new Cliente()
+            {
+                ClienteId = clienteVm.ClienteId,
+                Nombres = clienteVm.Nombres,
+                Apellido = clienteVm.Apellido,
+                Direccion = clienteVm.Direccion,
+                CodigoPostal = clienteVm.CodigoPostal,
+                PaisId = clienteVm.PaisId,
+                CiudadId = clienteVm.CiudadId
+            };
+        }
+
+        public static ClienteEditVm ConstruirClienteEditVm(Cliente cliente)
+        {
+            return new ClienteEditVm()
+            {
+                ClienteId = cliente.ClienteId,
+                Nombres = cliente.Nombres,
+                Apellido = cliente.Apellido,
+                Direccion = cliente.Direccion,
+                CodigoPostal = cliente.CodigoPostal,
+                PaisId = cliente.PaisId,
+                CiudadId = cliente.CiudadId
+
             };
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using JardinesEF.Datos.Comun.Facades;
@@ -225,6 +226,20 @@ namespace JardinesEF.Datos.Sql.Repositorios
                     .ToList();
             }
             catch (Exception e)
+            {
+                throw new Exception("Error al intentar leer la tabla de Ciudades");
+            }
+        }
+
+        public List<Ciudad> GetLista(int paisId)
+        {
+            try
+            {
+                return _context.Ciudades.Where(c => c.PaisId == paisId)
+                    .OrderBy(c => c.NombreCiudad)
+                    .ToList();
+            }
+            catch (Exception ex)
             {
                 throw new Exception("Error al intentar leer la tabla de Ciudades");
             }
