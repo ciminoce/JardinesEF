@@ -1,4 +1,5 @@
 ﻿@model PagedList.IPagedList<JardinesEF.Web.Models.Producto.ProductoListVm>
+@using JardinesEF.Web.Classes
 @using PagedList.Mvc
 
 @{
@@ -8,6 +9,36 @@
     <a href="@Url.Action("Create","Productos")" class="btn btn-primary" style="float: right">Nuevo</a>
     <h2>Listado de Productos</h2>
 </div>
+@if (TempData["operacion"] != null)
+{
+    var operacion = (Operacion)TempData["operacion"];
+    var msg = TempData["Msg"].ToString();
+    switch (operacion)
+    {
+        case Operacion.Agregar:
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Éxito!</strong> @msg
+            </div>
+
+            break;
+        case Operacion.Borrar:
+            <div class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Éxito!</strong> @msg
+            </div>
+
+            break;
+        case Operacion.Editar:
+            <div class="alert alert-warning alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Éxito!</strong> @msg
+            </div>
+
+            break;
+    }
+}
+
 @using (Html.BeginForm(null, null, FormMethod.Get, new { @class = "form-inline" }))
 {
     <p>
@@ -58,7 +89,7 @@
                 @Html.DisplayFor(modelItem => item.Suspendido)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Editar", "Edit", new { id=item.ProductoId }, new { @class = "btn btn-warning" })
                 @Html.ActionLink("Detalles", "Details", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-info" })
                 @Html.ActionLink("Borrar", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-danger" })
             </td>

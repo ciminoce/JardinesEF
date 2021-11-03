@@ -19,6 +19,7 @@ namespace JardinesEf.Entidades.Entidades
         public int UnidadesEnPedido { get; set; }
         public int NivelDeReposicion { get; set; }
         public bool Suspendido { get; set; }
+        public string Imagen { get; set; }
         public virtual Categoria Categoria { get; set; }
         public virtual ICollection<DetalleOrden> DetalleOrdenes { get; set; }
         public virtual Proveedor Proveedor { get; set; }

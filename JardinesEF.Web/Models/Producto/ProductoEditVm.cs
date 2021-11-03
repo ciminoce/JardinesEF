@@ -43,6 +43,11 @@ namespace JardinesEF.Web.Models.Producto
         [Display(Name = "Nivel Reposición")]
         public int NivelDeReposicion { get; set; }
         public bool Suspendido { get; set; }
+        
+        [DataType(DataType.ImageUrl)]
+        public string Imagen { get; set; }
+
+        public HttpPostedFileBase ImagenFile { get; set; }
 
         public string NombreProveedor { get;  }
         public List<ProveedorComboVm> Proveedores { get; set; }

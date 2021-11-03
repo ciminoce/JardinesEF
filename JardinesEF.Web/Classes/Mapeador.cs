@@ -205,7 +205,26 @@ namespace JardinesEF.Web.Classes
                 NivelDeReposicion = productoVm.NivelDeReposicion,
                 UnidadesEnStock = productoVm.UnidadesEnStock,
                 Suspendido = productoVm.Suspendido,
-                PrecioUnitario = productoVm.PrecioUnitario
+                PrecioUnitario = productoVm.PrecioUnitario,
+                Imagen = productoVm.Imagen
+
+            };
+        }
+        public static ProductoEditVm ConstruirProductoEditVm(Producto producto)
+        {
+            return new ProductoEditVm()
+            {
+                ProductoId = producto.ProductoId,
+                NombreProducto = producto.NombreProducto,
+                NombreLatin = producto.NombreLatin,
+                CategoriaId = producto.CategoriaId,
+                ProveedorId = producto.ProveedorId,
+                NivelDeReposicion = producto.NivelDeReposicion,
+                UnidadesEnStock = producto.UnidadesEnStock,
+                Suspendido = producto.Suspendido,
+                PrecioUnitario = producto.PrecioUnitario,
+                Imagen = producto.Imagen
+
             };
         }
 

@@ -84,6 +84,7 @@ namespace JardinesEF.Datos.Sql.Repositorios
                     productoInDb.PrecioUnitario = producto.PrecioUnitario;
                     productoInDb.NivelDeReposicion = producto.NivelDeReposicion;
                     productoInDb.NombreLatin = producto.NombreLatin;
+                    productoInDb.Imagen = producto.Imagen;
                     _context.Entry(productoInDb).State = EntityState.Modified;
                 }
             }
