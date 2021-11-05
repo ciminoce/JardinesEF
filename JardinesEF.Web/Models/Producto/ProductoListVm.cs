@@ -23,6 +23,7 @@ namespace JardinesEF.Web.Models.Producto
         public int UnidadesEnStock { get; set; }
 
         public bool Suspendido { get; set; }
+        public string Imagen { get; set; }
 
     }
 }

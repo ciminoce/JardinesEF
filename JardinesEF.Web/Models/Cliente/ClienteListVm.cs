@@ -12,6 +12,6 @@ namespace JardinesEF.Web.Models.Cliente
         public string Apellido { get; set; }
         public string Pais { get; set; }
         public string Ciudad { get; set; }
-
+        public string NombreCompleto => $"{Nombres} {Apellido}";
     }
 }

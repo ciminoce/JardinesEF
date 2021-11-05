@@ -1,0 +1,71 @@
+﻿@model JardinesEF.Web.Models.Carrito.DireccionEnvio
+
+@{
+    ViewBag.Title = "Dirección Envío";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <h3>Enviar a:</h3>
+    <div class="form-group">
+        @Html.DisplayNameFor(x => x.Direccion)
+        @Html.TextBoxFor(x => x.Direccion, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Direccion, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.DisplayNameFor(x => x.PaisId)
+        @Html.DropDownListFor(x => x.PaisId, new SelectList(Model.Paises, "PaisId", "NombrePais"), "Seleccione País", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.PaisId, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.DisplayNameFor(x => x.CiudadId)
+        @Html.DropDownListFor(x => x.CiudadId, new SelectList(Model.Ciudades, "CiudadId", "NombreCiudad"), "Seleccione Ciudad", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x=>x.CiudadId,"",new {@class="text-danger"})
+      </div>
+    <div class="form-group">
+        @Html.DisplayNameFor(x => x.CodigoPostal)
+        @Html.TextBoxFor(x => x.CodigoPostal, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.CodigoPostal, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="Siguiente" />
+    </div>
+}
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#PaisId").change(function() {
+                $("#CiudadId").empty();
+            });
+
+            $("#PaisId").change(function() {
+                $("#CiudadId").empty();
+                $("#CiudadId").append('<option value="0">[Seleccionar Ciudad]</option>');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetCities")',
+                    dataType: 'json',
+                    data: {
+                        paisId: $("#PaisId").val()
+
+                    },
+                    success: function(ciudades) {
+                        $.each(ciudades,
+                            function(i, ciudad) {
+                                $("#CiudadId").append('<option value="' + ciudad.CiudadId + '">' + ciudad.NombreCiudad + '</option>');
+                            });
+                    },
+                    error: function(ex) {
+                        alert('Error al intentar cargar las ciudades.' + ex);
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+}

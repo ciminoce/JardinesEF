@@ -159,7 +159,7 @@ namespace JardinesEF.Web.Classes
             return listaVm;
         }
 
-        private static ProductoListVm ConstruirProductoListVm(Producto producto)
+        public static ProductoListVm ConstruirProductoListVm(Producto producto)
         {
             return new ProductoListVm()
             {
@@ -169,6 +169,7 @@ namespace JardinesEF.Web.Classes
                 UnidadesEnStock = producto.UnidadesEnStock,
                 PrecioUnitario = producto.PrecioUnitario,
                 Suspendido = producto.Suspendido,
+                Imagen = producto.Imagen
             };
         }
 

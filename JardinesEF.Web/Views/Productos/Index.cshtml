@@ -53,6 +53,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model=>model.FirstOrDefault().Imagen)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().NombreProducto)
         </th>
         <th>
@@ -74,6 +77,19 @@
     {
         <tr>
             <td>
+                @if (item.Imagen == null)
+                {
+                    <img id="imgSalida" src="@Url.Content($"~/Content/Imagenes/Productos/SinImagenDisponible.jpg")" style="height: 50px" class="img-thumbnail">
+
+                }
+                else
+                {
+                    <img id="imgSalida" src="@Url.Content($"~/Content/Imagenes/Productos/{item.Imagen}")" style="height: 50px" class="img-thumbnail">
+
+                }
+
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.NombreProducto)
             </td>
             <td>
@@ -89,9 +105,27 @@
                 @Html.DisplayFor(modelItem => item.Suspendido)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id=item.ProductoId }, new { @class = "btn btn-warning" })
-                @Html.ActionLink("Detalles", "Details", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-info" })
-                @Html.ActionLink("Borrar", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-danger" })
+                @using (Html.BeginForm("AddToCart", "Carrito"))
+                {
+                    <div class="btn-group">
+                        @Html.ActionLink("Edit", "Edit", "Productos", new {id = item.ProductoId}, new {@class = "btn btn-warning"})
+                        @Html.ActionLink("Details", "Details", "Productos", new {id = item.ProductoId}, new {@class = "btn btn-info"})
+                        @Html.ActionLink("Borrar", "Delete", "Productos", new {id = item.ProductoId}, new {@class = "btn btn-danger"})
+
+                        <div style="float: right">
+                            @Html.Hidden("productoId", item.ProductoId)
+                            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                            @if (!item.Suspendido)
+                            {
+                                <input type="submit" class="btn btn-default" value="Agregar"/>
+                            }
+                            else
+                            {
+                                <input type="submit" class="btn btn-default" value="Agregar" disabled="disabled"/>
+                            }
+                        </div>
+                    </div>
+                }
             </td>
         </tr>
     }

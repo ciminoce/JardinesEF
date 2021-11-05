@@ -22,15 +22,25 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Países", "Index", "Paises")</li>
-                    <li>@Html.ActionLink("Ciudades", "Index2", "Ciudades")</li>
-                    <li>@Html.ActionLink("Categorias", "Index", "Categorias")</li>
-                    <li>@Html.ActionLink("Productos", "Index", "Productos")</li>
-                    <li>@Html.ActionLink("Clientes", "Index", "Clientes")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Archivos <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="@Url.Action("Index","Paises")">Países</a></li>
+                            <li><a href="@Url.Action("Index2","Ciudades")">Ciudades</a></li>
+                            <li class="divider"></li>
+                            <li><a href="@Url.Action("Index","Clientes")">Clientes</a></li>
+                            <li><a href="#">Proveedores</a></li>
+                            <li class="divider"></li>
+                            <li><a href="@Url.Action("Index","Categorias")">Categorías</a></li>
+                            <li class="divider"></li>
+                            <li><a href="@Url.Action("Index","Productos")">Productos</a></li>
 
+                        </ul>
+                    </li>
                     <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                 </ul>
+                @Html.Action("ResumenCarrito", "Carrito")
             </div>
         </div>
     </div>

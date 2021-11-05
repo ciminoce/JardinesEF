@@ -1,0 +1,11 @@
+﻿@model JardinesEF.Web.Models.Carrito.CarritoModel
+<div class="navbar-right">
+    @Html.ActionLink("CheckOut", "CheckOut", "Carrito",
+        new { returnUrl = Request.Url.PathAndQuery },
+        new { @class = "btn btn-default navbar-btn" })
+</div>
+<div class="navbar-text navbar-right">
+    <b>Tu carrito:</b>
+    @Model.Items.Sum(i => i.Cantidad) item(s),
+    $@Model.GetCartTotal()
+</div>

@@ -1,0 +1,28 @@
+﻿@model JardinesEF.Web.Models.Carrito.FacturacionInfo
+
+@{
+    ViewBag.Title = "Facturacion Info";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <h3>Facturar a:</h3>
+    <div class="form-group">
+        <label>Cliente</label>
+        @Html.DropDownListFor(x => x.ClienteId, new SelectList(Model.Clientes, "ClienteId", "NombreCompleto"), "Seleccione Cliente", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Tarjeta Crédito Nro</label>
+        @Html.TextBoxFor(x => x.TarjetaCreditoNro, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Fecha Vencimiento</label>
+        @Html.DropDownListFor(x => x.MesVencimiento, Model.Meses(), "--Mes Vencimiento--", new { @class = "form-control" })
+        @Html.DropDownListFor(x => x.AnioVencimiento, Model.Anios(), "--Año Vencimiento--", new { @class = "form-control" })
+    </div>
+
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="Checkout" />
+    </div>
+}

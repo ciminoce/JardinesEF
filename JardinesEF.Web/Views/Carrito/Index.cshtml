@@ -1,0 +1,71 @@
+﻿@model JardinesEF.Web.Models.Carrito.CarritoViewModel
+@{
+    ViewBag.Title = "Jardines Shopping Cart";
+}
+
+<h2>
+    Carrito
+</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Cantidad
+            </th>
+            <th>
+                Producto
+            </th>
+            <th class="text-right">
+                Precio
+            </th>
+            <th class="text-right">
+                Subtotal
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Carrito.Items)
+        {
+            <tr>
+                <td class="text-center">
+                    @item.Cantidad
+                </td>
+                <td class="text-left">
+                    @item.Producto.NombreProducto
+                </td>
+                <td class="text-right">
+                    @item.Producto.PrecioUnitario.ToString("c")
+                </td>
+                <td class="text-right">
+                    @((item.Cantidad * item.Producto.PrecioUnitario).ToString("c"))
+                </td>
+                <td>
+                    @using (Html.BeginForm("RemoveFromCart", "Carrito"))
+                    {
+                        @Html.Hidden("productoId", item.Producto.ProductoId)
+                        @Html.HiddenFor(x => x.ReturnUrl)
+                        <input type="submit" value="Borrar" class="btn btn-danger" />
+                    }
+                </td>
+
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">
+                Total:
+            </td>
+            <td class="text-right">
+                @Model.Carrito.GetCartTotal().ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<div class="text-center">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">
+        Continuar Comprando
+    </a>
+    @Html.ActionLink("Checkout", "DireccionEnvio", null, new { @class = "btn btn-success" })
+
+</div>
