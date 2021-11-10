@@ -15,6 +15,11 @@ namespace JardinesEf.Entidades.Entidades
         public DateTime FechaCompra { get; set; }
         public DateTime? FechaEntrega { get; set; }
         public DateTime? FechaEnvío { get; set; }
+
+        public string DireccionEnvio { get; set; }
+        public string CodigoPostalEnvio { get; set; }
+        public int PaisEnvioId { get; set; }
+        public int CiudadEnvioId { get; set; }
         public virtual Cliente Cliente { get; set; }
         public virtual ICollection<DetalleOrden> DetalleOrdenes { get; set; }
 

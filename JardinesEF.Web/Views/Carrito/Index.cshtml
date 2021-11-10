@@ -43,6 +43,7 @@
                     @using (Html.BeginForm("RemoveFromCart", "Carrito"))
                     {
                         @Html.Hidden("productoId", item.Producto.ProductoId)
+                        @Html.Hidden("cantidad",item.Cantidad)
                         @Html.HiddenFor(x => x.ReturnUrl)
                         <input type="submit" value="Borrar" class="btn btn-danger" />
                     }
@@ -66,6 +67,15 @@
     <a class="btn btn-primary" href="@Model.ReturnUrl">
         Continuar Comprando
     </a>
-    @Html.ActionLink("Checkout", "DireccionEnvio", null, new { @class = "btn btn-success" })
+    @Html.ActionLink("Cancelar Compra","CancelOrder",null,new{@class="btn btn-danger"})
+    @if (Model.Carrito.Items.Any())
+    {
+        <a class="btn btn-success" href="@Url.Action("DireccionEnvio","Carrito")">CheckOut</a>
+    }
+    else
+    {
+        <a class="btn btn-success" disabled="disabled">CheckOut</a>
+
+    }
 
 </div>

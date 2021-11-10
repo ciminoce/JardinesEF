@@ -81,5 +81,23 @@ namespace JardinesEF.Datos.Sql.Repositorios
         {
             throw new NotImplementedException();
         }
+
+        public List<Orden> GetLista()
+        {
+            try
+            {
+                return _context.Ordenes
+                    .Include(o => o.Cliente)
+                    .Include(o => o.DetalleOrdenes)
+                    .OrderBy(o => o.OrdenId)
+                    .AsNoTracking()
+                    .ToList();
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

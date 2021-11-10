@@ -1,8 +1,22 @@
 ﻿@model JardinesEF.Web.Models.Carrito.CarritoModel
 <div class="navbar-right">
-    @Html.ActionLink("CheckOut", "CheckOut", "Carrito",
+    @if (Model.Items.Any())
+    {
+        <a href="@Url.Action("DireccionEnvio","Carrito",new{returnUrl=Request.Url.PathAndQuery})"
+           class="btn btn-default navbar-btn">CheckOut</a>
+    }
+    else
+    {
+        <a class="btn btn-default navbar-btn" disabled="disabled">CheckOut</a>
+
+    }
+    @*@Html.ActionLink("CheckOut", "DireccionEnvio", "Carrito",
         new { returnUrl = Request.Url.PathAndQuery },
-        new { @class = "btn btn-default navbar-btn" })
+        new { @class = "btn btn-default navbar-btn" })*@
+    @Html.ActionLink("Ver Carrito", "Index", "Carrito",
+        new { returnUrl = Request.Url.PathAndQuery },
+        new { @class = "btn btn-success navbar-btn" })
+
 </div>
 <div class="navbar-text navbar-right">
     <b>Tu carrito:</b>

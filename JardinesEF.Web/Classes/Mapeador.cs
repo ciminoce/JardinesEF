@@ -8,6 +8,7 @@ using JardinesEf.Entidades.Entidades;
 using JardinesEF.Web.Models.Categoria;
 using JardinesEF.Web.Models.Ciudad;
 using JardinesEF.Web.Models.Cliente;
+using JardinesEF.Web.Models.Orden;
 using JardinesEF.Web.Models.Pais;
 using JardinesEF.Web.Models.Producto;
 using JardinesEF.Web.Models.Proveedor;
@@ -166,7 +167,7 @@ namespace JardinesEF.Web.Classes
                 ProductoId = producto.ProductoId,
                 NombreProducto = producto.NombreProducto,
                 Categoria = producto.Categoria.NombreCategoria,
-                UnidadesEnStock = producto.UnidadesEnStock,
+                StockDisponible = producto.UnidadesEnStock-producto.UnidadesEnPedido,
                 PrecioUnitario = producto.PrecioUnitario,
                 Suspendido = producto.Suspendido,
                 Imagen = producto.Imagen
@@ -281,6 +282,24 @@ namespace JardinesEF.Web.Classes
                 CiudadId = cliente.CiudadId
 
             };
+        }
+
+        public static List<OrdenListVm> ConstruirListaOrdenesListVm(List<Orden> lista)
+        {
+            List<OrdenListVm> listaVm = new List<OrdenListVm>();
+            foreach (var orden in lista)
+            {
+                var ordenVm = new OrdenListVm()
+                {
+                    Cliente = orden.Cliente.ApeNombre,
+                    FechaCompra = orden.FechaCompra,
+                    FechaEntrega = orden.FechaEntrega,
+                    OrdenId = orden.OrdenId
+                };
+                listaVm.Add(ordenVm);
+            }
+
+            return listaVm;
         }
     }
 }

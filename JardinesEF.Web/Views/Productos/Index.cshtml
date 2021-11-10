@@ -65,7 +65,7 @@
             @Html.DisplayNameFor(model => model.FirstOrDefault().PrecioUnitario)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().UnidadesEnStock)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().StockDisponible)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().Suspendido)
@@ -99,7 +99,7 @@
                 @Html.DisplayFor(modelItem => item.PrecioUnitario)
             </td>
             <td style="text-align: right">
-                @Html.DisplayFor(modelItem => item.UnidadesEnStock)
+                @Html.DisplayFor(modelItem => item.StockDisponible)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Suspendido)
@@ -115,13 +115,13 @@
                         <div style="float: right">
                             @Html.Hidden("productoId", item.ProductoId)
                             @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-                            @if (!item.Suspendido)
+                            @if (item.Suspendido || item.StockDisponible == 0)
                             {
-                                <input type="submit" class="btn btn-default" value="Agregar"/>
+                                <input type="submit" class="btn btn-default" value="Agregar" disabled="disabled" />
                             }
                             else
                             {
-                                <input type="submit" class="btn btn-default" value="Agregar" disabled="disabled"/>
+                                <input type="submit" class="btn btn-default" value="Agregar" />
                             }
                         </div>
                     </div>

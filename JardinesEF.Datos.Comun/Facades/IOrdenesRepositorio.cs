@@ -9,6 +9,6 @@ namespace JardinesEF.Datos.Comun.Facades
 {
     public interface IOrdenesRepositorio:IRepositorio<Orden>
     {
-
+        List<Orden> GetLista();
     }
 }

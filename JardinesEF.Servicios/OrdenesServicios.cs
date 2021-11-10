@@ -97,5 +97,18 @@ namespace JardinesEF.Servicios
                 }
             }
         }
+
+        public List<Orden> GetLista()
+        {
+            try
+            {
+                return _repositorio.GetLista();
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

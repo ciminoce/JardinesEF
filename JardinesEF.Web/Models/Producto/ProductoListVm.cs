@@ -20,7 +20,7 @@ namespace JardinesEF.Web.Models.Producto
         public decimal PrecioUnitario { get; set; }
 
         [Display(Name = "Stock")]
-        public int UnidadesEnStock { get; set; }
+        public int StockDisponible { get; set; }
 
         public bool Suspendido { get; set; }
         public string Imagen { get; set; }

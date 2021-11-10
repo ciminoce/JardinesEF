@@ -159,6 +159,7 @@
     <Compile Include="Controllers\CiudadesController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdenesController.cs" />
     <Compile Include="Controllers\PaisesController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Global.asax.cs">
@@ -175,6 +176,7 @@
     <Compile Include="Models\Ciudad\CiudadListVm.cs" />
     <Compile Include="Models\Cliente\ClienteEditVm.cs" />
     <Compile Include="Models\Cliente\ClienteListVm.cs" />
+    <Compile Include="Models\Orden\OrdenListVm.cs" />
     <Compile Include="Models\Pais\PaisDetailsVm.cs" />
     <Compile Include="Models\Pais\PaisEditVm.cs" />
     <Compile Include="Models\Pais\PaisListVm.cs" />
@@ -253,6 +255,9 @@
     <Content Include="Views\Carrito\DireccionEnvio.cshtml" />
     <Content Include="Views\Carrito\FacturacionInfo.cshtml" />
     <Content Include="Views\Carrito\OrdenCompleta.cshtml" />
+    <Content Include="Views\Carrito\CancelOrder.cshtml" />
+    <Content Include="Views\Carrito\EmptyCart.cshtml" />
+    <Content Include="Views\Ordenes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
