@@ -176,6 +176,8 @@
     <Compile Include="Models\Ciudad\CiudadListVm.cs" />
     <Compile Include="Models\Cliente\ClienteEditVm.cs" />
     <Compile Include="Models\Cliente\ClienteListVm.cs" />
+    <Compile Include="Models\DetalleOrden\DetalleOrdenListVm.cs" />
+    <Compile Include="Models\Orden\OrdenDetailsVm.cs" />
     <Compile Include="Models\Orden\OrdenListVm.cs" />
     <Compile Include="Models\Pais\PaisDetailsVm.cs" />
     <Compile Include="Models\Pais\PaisEditVm.cs" />
@@ -258,6 +260,7 @@
     <Content Include="Views\Carrito\CancelOrder.cshtml" />
     <Content Include="Views\Carrito\EmptyCart.cshtml" />
     <Content Include="Views\Ordenes\Index.cshtml" />
+    <Content Include="Views\Ordenes\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

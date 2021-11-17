@@ -39,7 +39,17 @@ namespace JardinesEF.Datos.Sql.Repositorios
 
         public Orden GetTEntityPorId(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _context.Ordenes
+                    .Include(o => o.Cliente)
+                    .SingleOrDefault(o => o.OrdenId == id);
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public void Guardar(Orden orden)

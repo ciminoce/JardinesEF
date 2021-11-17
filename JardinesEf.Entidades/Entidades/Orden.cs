@@ -18,9 +18,12 @@ namespace JardinesEf.Entidades.Entidades
 
         public string DireccionEnvio { get; set; }
         public string CodigoPostalEnvio { get; set; }
-        public int PaisEnvioId { get; set; }
-        public int CiudadEnvioId { get; set; }
+        public int PaisId { get; set; }
+        public int CiudadId { get; set; }
         public virtual Cliente Cliente { get; set; }
+        public virtual Pais Pais { get; set; }
+        public virtual Ciudad Ciudad { get; set; }
+
         public virtual ICollection<DetalleOrden> DetalleOrdenes { get; set; }
 
         public decimal TotalVenta => DetalleOrdenes.Sum(d => d.PrecioUnitario * (decimal)d.Cantidad);

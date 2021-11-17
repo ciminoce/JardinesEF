@@ -8,6 +8,7 @@ using JardinesEf.Entidades.Entidades;
 using JardinesEF.Web.Models.Categoria;
 using JardinesEF.Web.Models.Ciudad;
 using JardinesEF.Web.Models.Cliente;
+using JardinesEF.Web.Models.DetalleOrden;
 using JardinesEF.Web.Models.Orden;
 using JardinesEF.Web.Models.Pais;
 using JardinesEF.Web.Models.Producto;
@@ -300,6 +301,44 @@ namespace JardinesEF.Web.Classes
             }
 
             return listaVm;
+        }
+
+        public static OrdenDetailsVm ConstruirOrdenDetailsVm(Orden orden)
+        {
+            return new OrdenDetailsVm()
+            {
+                OrdenId = orden.OrdenId,
+                Cliente = orden.Cliente.ApeNombre,
+                DireccionEnvio = orden.DireccionEnvio,
+                CodigoPostalEnvio = orden.CodigoPostalEnvio,
+                Ciudad = orden.Ciudad.NombreCiudad,
+                Pais = orden.Pais.NombrePais,
+                FechaCompra = orden.FechaCompra,
+                FechaEntrega = orden.FechaEntrega,
+                DetalleOrdenes = ConstruirListaDetalleOrdenListVm(orden.DetalleOrdenes)
+            };
+        }
+
+        private static List<DetalleOrdenListVm> ConstruirListaDetalleOrdenListVm(ICollection<DetalleOrden> detalleOrden)
+        {
+            List<DetalleOrdenListVm> lista = new List<DetalleOrdenListVm>();
+            foreach (var item in detalleOrden)
+            {
+                DetalleOrdenListVm itemVm = ConstruirDetalleOrdenListVm(item);
+                lista.Add(itemVm);
+            }
+
+            return lista;
+        }
+
+        private static DetalleOrdenListVm ConstruirDetalleOrdenListVm(DetalleOrden item)
+        {
+            return new DetalleOrdenListVm()
+            {
+                Producto = item.Producto.NombreProducto,
+                Cantidad = item.Cantidad,
+                PrecioUnitario = item.PrecioUnitario
+            };
         }
     }
 }

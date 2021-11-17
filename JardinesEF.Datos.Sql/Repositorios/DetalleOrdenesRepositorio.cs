@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,7 +61,16 @@ namespace JardinesEF.Datos.Sql.Repositorios
 
         public List<DetalleOrden> GetLista(int OrdenId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _context.DetallesOrdenes
+                    .Include(d=>d.Producto)
+                    .Where(d => d.OrdenId == OrdenId).ToList();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public decimal GetTotal(int OrdenId)

@@ -14,5 +14,6 @@ namespace JardinesEF.Servicios.Facades
         void CancelarReservas(List<DetalleOrden> listaItemsCompra);
         void Guardar(Orden orden);
         List<Orden> GetLista();
+        Orden GetOrdenPorId(int id);
     }
 }

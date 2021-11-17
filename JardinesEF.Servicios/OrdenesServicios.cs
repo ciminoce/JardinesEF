@@ -110,5 +110,20 @@ namespace JardinesEF.Servicios
                 throw new Exception(e.Message);
             }
         }
+
+        public Orden GetOrdenPorId(int id)
+        {
+            try
+            {
+                var orden = _repositorio.GetTEntityPorId(id);
+                orden.DetalleOrdenes = _repositorioDetalles.GetLista(id);
+                return orden;
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

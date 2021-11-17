@@ -1,0 +1,79 @@
+﻿@model JardinesEF.Web.Models.Orden.OrdenDetailsVm
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles de la Orden:@Model.OrdenId</h2>
+<h3 class="well">Datos de la Venta</h3>
+<div class="row">
+    <div class="col-md-5">
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.Cliente)
+            @Html.DisplayFor(model => model.Cliente)
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.FechaCompra)
+            @Html.DisplayFor(model => model.FechaCompra)
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.FechaEntrega)
+            @Html.DisplayFor(model => model.FechaEntrega)
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.DireccionEnvio)
+            @Html.DisplayFor(model => model.DireccionEnvio)
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.CodigoPostalEnvio)
+            @Html.DisplayFor(model => model.CodigoPostalEnvio)
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.Ciudad)
+            @Html.DisplayFor(model => model.Ciudad)
+        </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.Pais)
+            @Html.DisplayFor(model => model.Pais)
+        </div>
+
+    </div>
+</div>
+<p>
+    <a href="@Url.Action("Index","Ordenes")" class="btn btn-success">Volver</a>
+</p>
+<h3 class="well">Detalle de la Orden</h3>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DetalleOrdenes[0].Producto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DetalleOrdenes[0].Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DetalleOrdenes[0].PrecioUnitario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DetalleOrdenes[0].Subtotal)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.DetalleOrdenes)
+    {
+        <tr>
+            <td>@item.Producto</td>
+            <td>@item.Cantidad</td>
+            <td>@item.PrecioUnitario</td>
+            <td>@item.Subtotal</td>
+        </tr>
+    }
+    <tr>
+        <td colspan="3"><strong>Total:</strong></td>
+        <td><strong>@Model.TotalVenta</strong></td>
+    </tr>
+    </tbody>
+</table>

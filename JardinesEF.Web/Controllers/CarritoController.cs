@@ -135,8 +135,8 @@ namespace JardinesEF.Web.Controllers
                         FechaEntrega = DateTime.Now.AddDays(5),
                         DireccionEnvio = carrito.DireccionEnvio.Direccion,
                         CodigoPostalEnvio = carrito.DireccionEnvio.CodigoPostal,
-                        PaisEnvioId = carrito.DireccionEnvio.PaisId,
-                        CiudadEnvioId = carrito.DireccionEnvio.CiudadId,
+                        PaisId = carrito.DireccionEnvio.PaisId,
+                        CiudadId = carrito.DireccionEnvio.CiudadId,
                         DetalleOrdenes = ObtenerDetalleOrdenDelCarrito(carrito)
                     };
                     _servicioOrdnes.Guardar(orden);
