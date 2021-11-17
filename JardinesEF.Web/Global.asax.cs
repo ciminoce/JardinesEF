@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using JardinesEF.Web.Classes;
 
 namespace JardinesEF.Web
 {
@@ -12,10 +13,18 @@ namespace JardinesEF.Web
     {
         protected void Application_Start()
         {
+            CreateRolesAndSuperUser();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+        private void CreateRolesAndSuperUser()
+        {
+            UsersHelper.CheckRole("Admin");
+            UsersHelper.CheckRole("Cliente");
+            UsersHelper.CheckSuperUser();
+        }
+
     }
 }

@@ -35,7 +35,7 @@ namespace JardinesEF.Web.Controllers
             return View(listaPaisVm);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult Create()
         {
@@ -70,7 +70,7 @@ namespace JardinesEF.Web.Controllers
             }
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -116,7 +116,7 @@ namespace JardinesEF.Web.Controllers
                 return View(paisVm);
             }
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult Delete(int? id)
         {
@@ -178,7 +178,7 @@ namespace JardinesEF.Web.Controllers
                 Mapeador.ConstruirListaCiudadListVm(_servicioCiudades.Find(c => c.PaisId == pais.PaisId, null, null));
             return View(paisVm);
         }
-
+        [Authorize]
         public ActionResult AddCity(int? id)
         {
             if (id==null)
@@ -234,7 +234,7 @@ namespace JardinesEF.Web.Controllers
                 return View(ciudadVm);
             }
         }
-
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteCity(int? id)
         {
             if (id==null)

@@ -4,7 +4,11 @@
     ViewBag.Title = "Index";
 }
 <div>
-    <a href="@Url.Action("Create","Paises")" class="btn btn-primary" style="float: right">Nuevo</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a href="@Url.Action("Create", "Paises")" class="btn btn-primary" style="float: right">Nuevo</a>
+
+    }
     <h2>Listado de Países</h2>
 </div>
 
@@ -30,9 +34,12 @@
     </td>
 
     <td>
-        @Html.ActionLink("Editar", "Edit", new { id = item.PaisId }, new { @class = "btn btn-warning" }) |
-        @Html.ActionLink("Detalles", "Details", new { id=item.PaisId }, new { @class = "btn btn-info" }) |
-        @Html.ActionLink("Borrar", "Delete", new { id = item.PaisId }, new { @class = "btn btn-danger" })
+        @if (User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Editar", "Edit", new { id = item.PaisId }, new { @class = "btn btn-warning" }) 
+            @Html.ActionLink("Borrar", "Delete", new { id = item.PaisId }, new { @class = "btn btn-danger" })
+        }
+        @Html.ActionLink("Detalles", "Details", new { id = item.PaisId }, new { @class = "btn btn-info" }) 
     </td>
 </tr>
 }
