@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using JardinesEF.Datos.Comun;
 using JardinesEF.Datos.Comun.Facades;
 using JardinesEF.Datos.Sql;
